@@ -18,14 +18,14 @@ V RV32IM implementations.
 
 ## Implementation Description
 - Scalar (Reference)(1)
-	- RV32IM-1new (PC, INSTMEMORY, DECODE, REGISTER, ALU, BRANCH, DATAMEMORY, main RV32IM module)
+	- [RV32IM-1new](RV32IM-1new/RV32IM-1new.v) (PC, INSTMEMORY, DECODE, REGISTER, ALU, BRANCH, DATAMEMORY, main RV32IM module)
 - 2-way SuperScalar(2)
-	- RV32IM-2new-notopt (single mul/div calculator and single load/store unit, not superscalared when Data hazards or Structural hazards or Control hazards)
-	- RV32IM-2new (added speculative exectuion and Macro Op Fusion(6 idioms: slli+add, add+load, lui+addi, mulh+mul/div+rem, load pair(continuous 4bytes+4bytes load), store pair(continuous 4bytes+4bytes store), and expanded 64bit continuous memory access to RV32IM-2new-notopt)
+	- [RV32IM-2new-notopt](RV32IM-2new-notopt/RV32IM-2new-notopt.v) (single mul/div calculator and single load/store unit, not superscalared when Data hazards or Structural hazards or Control hazards)
+	- [RV32IM-2new](RV32IM-2new/RV32IM-2new.v) (added speculative exectuion and Macro Op Fusion(6 idioms: slli+add, add+load, lui+addi, mulh+mul/div+rem, load pair(continuous 4bytes+4bytes load), store pair(continuous 4bytes+4bytes store), and expanded 64bit continuous memory access to RV32IM-2new-notopt)
 - 3-way SuperScalar(3)
-	- RV32IM-3new-notopt (single mul/div calculator and single load/store unit, not superscalared when Data hazards or Structural hazards or Control hazards)
-	- RV32IM-3new (added speculative exectuion and Macro Op Fusion(7 idioms: slli+add, add+load, slli+add+load, lui+addi, mulh+mul/div+rem, load pair(continuous 4bytes+4bytes load), store pair(continuous 4bytes+4bytes store), and expanded 64bit continuous memory access to RV32IM-2new-notopt)
-	- RV32IM-3new2 (added speculative exectuion and Macro Op Fusion(8 idioms: slli+add, add+load, slli+add+load, lui+addi, mulh+mul/div+rem, load pair(continuous 4bytes+4bytes load), store pair(continuous 4bytes+4bytes store), load trio(continuous 4bytes+4bytes+4bytes load), store trio(continuous 4bytes+4bytes+4bytes store), and expanded 96bit continuous memory access to RV32IM-2new-notopt)
+	- [RV32IM-3new-notopt](RV32IM-3new-notopt/RV32IM-3new-notopt.v) (single mul/div calculator and single load/store unit, not superscalared when Data hazards or Structural hazards or Control hazards)
+	- [RV32IM-3new](RV32IM-3new/RV32IM-3new.v) (added speculative exectuion and Macro Op Fusion(7 idioms: slli+add, add+load, slli+add+load, lui+addi, mulh+mul/div+rem, load pair(continuous 4bytes+4bytes load), store pair(continuous 4bytes+4bytes store), and expanded 64bit continuous memory access to RV32IM-2new-notopt)
+	- [RV32IM-3new2](RV32IM-3new2/RV32IM-3new2.v) (added speculative exectuion and Macro Op Fusion(8 idioms: slli+add, add+load, slli+add+load, lui+addi, mulh+mul/div+rem, load pair(continuous 4bytes+4bytes load), store pair(continuous 4bytes+4bytes store), load trio(continuous 4bytes+4bytes+4bytes load), store trio(continuous 4bytes+4bytes+4bytes store), and expanded 96bit continuous memory access to RV32IM-2new-notopt)
 
 ## LICENSE
   ```
