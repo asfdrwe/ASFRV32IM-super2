@@ -80,7 +80,7 @@ module PREDECODE(input wire [31:0] tmpopcode1, input wire [31:0] tmpopcode2,
   //
   // Wide Multiply/Divide & Remainder
   // 31      25 24 20 19  15 14  12 11      7 6     0   17  1514          3 2  0
-  // | funct7   | rs2 | rs1  |funct3|  rdl   |0001011| +|000  |0000000rsh  |001|
+  // | funct7   | rs2 | rs1  |funct3|  rdh   |0001011| +|000  |0000000rdl  |001|
   // mulh[[s]u] rdh, rs1, rs2
   // mul        rdl, rs1, rs2
   //
@@ -470,12 +470,12 @@ module ALU(input wire [4:0] alucon, input wire [2:0] op1sel, input wire op2sel,
       tmpalu2 = (data2 == 32'b0) ? data1 :
                 ((data1 == 32'h8000_0000) && (data2 == 32'hffff_ffff)) ? 32'h0 :
                                                                          $signed($signed(data1) % $signed(data2));
-      ALU_EXEC = {tmpalu2, tmpalu1};
+      ALU_EXEC = {tmpalu1, tmpalu2};
     end
     5'b11101: begin // DIVU + REMU
       tmpalu1 = (data2 == 32'b0) ? 32'hffff_ffff : (data1 / data2);
       tmpalu2 = (data2 == 32'b0) ? data1 : (data1 % data2);
-      ALU_EXEC = {tmpalu2, tmpalu1};
+      ALU_EXEC = {tmpalu1, tmpalu2};
     end
     default: // ILLEGAL
       ALU_EXEC = 64'b0;
@@ -485,7 +485,7 @@ module ALU(input wire [4:0] alucon, input wire [2:0] op1sel, input wire op2sel,
   wire [63:0] tmp;
   assign tmp = ALU_EXEC(alucon, s_data1, s_data2);
   assign {alu_extra_data, alu_data} = ((alucon == 5'b11001) || (alucon == 5'b11010) || (alucon == 5'b11011) || 
-                                       (alucon == 5'b11100) || (alucon == 5'b11101)) ? tmp :
+                                       (alucon == 5'b11100) || (alucon == 5'b11101)) ? {tmp[31:0], tmp[63:32]} :
                                        (alucon == 5'b01001) ? ($signed(tmp) >>> 32) : 
                                       ((alucon == 5'b01010) || (alucon == 5'b01011)) ? (tmp >> 32) :
                                                                                       {32'b0, tmp[31:0]};

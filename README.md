@@ -51,6 +51,9 @@ IN THE SOFTWARE.
   ```
 
 ## Changelog
+- 20210419
+fixed WMDR macro op fusion 
+
 - 20210403
 initial release
 
